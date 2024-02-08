@@ -1,0 +1,14 @@
+<select
+  class="form-select form-select-lg"
+  aria-label="Small select example"
+  (change)="selectChangeHandler($event)"
+  [value]="selectValue"
+>
+  <option
+    *ngFor="let option of optionsData"
+    [value]="option.value"
+    [selected]="selectValue"
+  >
+    {{ option.label }}
+  </option>
+</select>

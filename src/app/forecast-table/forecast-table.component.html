@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="select-container">
+    <app-select
+      [optionsData]="timelineSelectOptions"
+      [(selectValue)]="timelineSelectValue"
+      (selectValueChange)="selectValueChangeHandler($event)"
+    />
+  </div>
+  <div class="table-container">
+
+    <p class="info">
+      Weather forecast for
+      <strong>{{ cityName }}</strong>
+    </p>
+
+    <table
+      class="table table-striped"
+      *ngIf="tableBodyData.length > 0"
+    >
+
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            *ngFor="let label of tableHeaderData"
+          >
+            {{ label }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let row of tableBodyData; index as ii"
+          [ngClass]="{ 'end': row[0].includes('23:00') }"
+        >
+          <td>{{ ii + 1 }}</td>
+          <td scope="row" *ngFor="let item of row">
+            {{ item }}
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="select-container">
+    <app-select
+      [optionsData]="timelineSelectOptions"
+      [(selectValue)]="timelineSelectValue"
+      (selectValueChange)="selectValueChangeHandler($event)"
+    />
+  </div>
+  <p *ngIf="isError">Failed to load data</p>
+  <div class="chart-container" *ngIf="!isError">
+    <div echarts [options]="chartOption" class="chart"></div>
+  </div>
+</div>

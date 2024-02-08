@@ -3,16 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ForecastTableComponent } from './forecast-table/forecast-table.component';
+import { ForecastChartComponent } from './forecast-chart/forecast-chart.component';
+import { HeatIndexCalculatorComponent } from './heat-index-calculator/heat-index-calculator.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ForecastService } from './forecast.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SelectComponent } from './select/select.component';
+
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ForecastTableComponent,
+    ForecastChartComponent,
+    HeatIndexCalculatorComponent,
+    PageNotFoundComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgxEchartsModule.forRoot({ echarts }),
   ],
-  providers: [],
+  providers: [ForecastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
