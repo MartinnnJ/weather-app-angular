@@ -6,12 +6,18 @@
       (selectValueChange)="selectValueChangeHandler($event)"
     />
   </div>
-  <div class="table-container">
 
-    <p class="info">
-      Weather forecast for
-      <strong>{{ cityName }}</strong>
-    </p>
+  <p class="info">
+    Weather forecast for
+    <strong>
+      {{ cityName }}
+    </strong> 
+    <small *ngIf="tableBodyData.length > 0">
+      ({{ dateRange[0] }} - {{ dateRange[1] }})
+    </small>
+  </p>
+
+  <div class="table-container">
 
     <table
       class="table table-striped"
@@ -31,16 +37,25 @@
 
       <tbody>
         <tr
-          *ngFor="let row of tableBodyData; index as ii"
-          [ngClass]="{ 'end': row[0].includes('23:00') }"
+          *ngFor="let row of paginatedTableBodyData"
+          [ngClass]="{ 'end': row[1].includes('23:00') }"
         >
-          <td>{{ ii + 1 }}</td>
-          <td scope="row" *ngFor="let item of row">
+          <td
+            scope="row"
+            *ngFor="let item of row"
+          >
             {{ item }}
           </td>
         </tr>
       </tbody>
 
     </table>
+    
   </div>
+
+  <app-paginator
+    [values]="paginatorValues"
+    [(selectedPage)]="selectedPage"
+  />
+
 </div>

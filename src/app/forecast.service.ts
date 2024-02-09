@@ -6,7 +6,7 @@ import { locations } from "../helpers/constances";
   providedIn: 'root'
 })
 export class ForecastService {
-  readonly selectedLocation = locations[0];
+  readonly selectedLocation = locations[0]; // can fetch different locations
 
   constructor(private http: HttpClient) {}
 

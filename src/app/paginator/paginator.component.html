@@ -1,0 +1,19 @@
+<div class="container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination pagination-lg justify-content-center" *ngIf="values.length > 0">
+      <li
+        [ngClass]="{ 'page-item': true, 'active': selectedPage === num ? true : false }"
+        *ngFor="let num of values"
+      >
+        <a
+          class="page-link"
+          href=""
+          [attr.data-page]="num"
+          (click)="paginatorClickHandler($event)"
+        >
+          {{ num }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

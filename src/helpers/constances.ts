@@ -14,3 +14,15 @@ export const tableHeader = [
   'Surface Pressure [hPa]',
   'Weather State (Rain - mm)'
 ]
+
+export const timelineSelectData = [
+  { value: 0, label: 'For past 7 days' },
+  { value: 1, label: 'For upcoming 7 days' },
+];
+
+export const temperatureSelectData = [
+  { value: 0, label: 'Celsius - °C' },
+  { value: 1, label: 'Fahrenheit - °F' }
+];
+
+export const ROWS_PER_PAGE = 10;

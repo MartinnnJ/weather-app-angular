@@ -13,6 +13,7 @@ import { SelectComponent } from './select/select.component';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import * as echarts from 'echarts';
     ForecastChartComponent,
     HeatIndexCalculatorComponent,
     PageNotFoundComponent,
-    SelectComponent
+    SelectComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

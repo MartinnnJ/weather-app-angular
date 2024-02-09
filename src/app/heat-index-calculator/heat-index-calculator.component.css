@@ -1,0 +1,72 @@
+.container,
+.preview {
+  max-width: 80%;
+  margin: 3rem auto;
+}
+
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 3rem;
+  background-color: #f2f2f2;
+  margin-bottom: 6rem;
+}
+
+.val-plc,
+.result-plc {
+  font-weight: 700;
+}
+
+.result-plc {
+  color: #0275d8;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.5rem;
+  margin: 3rem 0;
+}
+
+label {
+  display: inline-block;
+  width: 15rem;
+}
+
+input {
+  display: inline-block;
+  max-width: 20rem;
+  font-size: 2rem;
+}
+
+.input-container:first-child {
+  margin-bottom: 2rem;
+}
+
+button {
+  width: 30rem;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}
+
+.log-msg {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.calculator-container {
+  min-height: 20rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+th, td {
+  text-align: center;
+}

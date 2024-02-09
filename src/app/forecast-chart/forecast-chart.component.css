@@ -3,6 +3,10 @@
   margin: 3rem auto;
 }
 
+.select-container {
+  margin: 3rem 0;
+}
+
 .chart {
   border: 1px solid grey;
   height: 40rem;

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ForecastService } from '../forecast.service';
-import { TimelineSelect } from '../../models/TimelineSelect';
+import { SelectData } from '../../models/TimelineSelect';
 import { ChartData } from '../../models/ChartData';
 import { chartRenderInfo, currentTime, formatTime } from '../../helpers/functions';
 import { EChartsOption } from 'echarts';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
+import { timelineSelectData } from '../../helpers/constances';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-forecast-chart',
@@ -13,13 +15,7 @@ import { catchError } from 'rxjs';
 })
 export class ForecastChartComponent implements OnInit {
   cityName!: string;
-  isError = false;
-
-  readonly timelineSelectOptions: TimelineSelect[] = [
-    { value: 0, label: 'For past 7 days' },
-    { value: 1, label: 'For upcoming 7 days' },
-  ];
-
+  readonly timelineSelectOptions: SelectData[] = timelineSelectData;
   timelineSelectValue = 0;
 
   forecastDataUpcoming!: ChartData;
@@ -28,6 +24,15 @@ export class ForecastChartComponent implements OnInit {
   chartOption!: EChartsOption;
 
   constructor(private forecastService: ForecastService) {}
+
+  handleError(err: HttpErrorResponse) {
+    if (err.status === 0) {
+      console.log('Network Error!', err.error);
+    } else {
+      console.log('Server Error!', err.error);
+    }
+    return throwError(() => new Error('Cannot fetch data from the server.'))
+  }
 
   selectValueChangeHandler(newValue: number) {
     if (newValue === 0) {
@@ -48,8 +53,8 @@ export class ForecastChartComponent implements OnInit {
   ngOnInit(): void {
     this.cityName = this.forecastService.selectedLocation.locationName;
     this.forecastService.loadForecastData()
-      .pipe(catchError((err: any) => []))
-      .subscribe((data: any) => { // + error handling, + init fetch only
+      .pipe(catchError(this.handleError))
+      .subscribe((data: any) => {
         const timeAxisData: string[] = data.hourly.time.map((str: string) => formatTime(str));
         const tempAxisData: number[] = data.hourly.temperature_2m;
 

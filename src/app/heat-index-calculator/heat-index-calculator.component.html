@@ -1,1 +1,131 @@
-<p>Calculator here</p>
+<div class="container">
+  <h1>Heat Index Calculator</h1>
+  <div class="calculator-container">
+
+    <div class="group">
+      <div class="input-container">
+        <label for="temp">
+          Temperature
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          [placeholder]="placeholderValue"
+          aria-label="Temperature"
+          aria-describedby="addon-wrapping"
+          id="temp"
+          [value]="temperatureInput"
+          (input)="temperatureInputChangeHandler($event)"
+        >
+      </div>
+  
+      <div class="input-container">
+        <label for="humidity">
+          Relative Humidity
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="%"
+          aria-label="Humidity"
+          aria-describedby="addon-wrapping"
+          id="humidity"
+          [value]="humidityInput"
+          (input)="humidityInputChangeHandler($event)"
+        >
+      </div>
+    </div>
+
+    <div class="group">
+      <app-select
+        [optionsData]="temperatureSelectOptions"
+        [(selectValue)]="temperatureSelectValue"
+      />
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="heatIndexCalculate($event)"
+      >
+        Calculate
+      </button>
+    </div>
+
+  </div>
+
+  <div
+    class="error"
+    *ngIf="isError"
+  >
+    Heat Index value cannot be calculated for temperatures less than
+    <strong>26.7 °C</strong> or <strong>80 °F</strong>.
+  </div>
+
+  <div class="preview">
+    <span class="val-plc">
+      {{ temperatureInput }}
+    </span>
+    <span class="unit-plc">
+      {{ placeholderValue }}
+    </span>
+    <span class="and-plc">
+      ^
+    </span>
+    <span class="val-plc">
+      {{ humidityInput }}
+    </span>
+    <span class="unit-plc">
+      %
+    </span> =
+    <span class="result-plc">
+      {{ calculationOutput }}
+    </span>
+    <span
+      class="unit-plc"
+      *ngIf="calculationOutput"
+    >
+      {{ placeholderValue }}
+    </span>
+  </div>
+
+  <div class="container">
+
+    <p
+      class="log-msg"
+      *ngIf="calculationLog.length === 0"
+    >
+      Heat index calculation log is empty
+    </p>
+
+    <table
+      class="table table-striped"
+      *ngIf="calculationLog.length > 0"
+    >
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Time</th>
+          <th>Temperature</th>
+          <th>Temp. unit</th>
+          <th>Relative Humidity [%]</th>
+          <th>Heat Index</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let log of calcLogSliced; index as ii">
+          <td>{{ ii + 1 }}</td>
+          <td>{{ log.time }}</td>
+          <td>{{ log.temperature }}</td>
+          <td>{{ log.temperatureUnit === 0 ? '°C': '°F' }}</td>
+          <td>{{ log.humidity }}</td>
+          <td>{{ log.heatIndex }}</td>
+        </tr>
+      </tbody>
+      
+    </table>
+    
+  </div>
+
+</div>
